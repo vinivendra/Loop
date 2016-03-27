@@ -19,6 +19,11 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         backgroundView.frame = view.bounds
         view.addSubview(backgroundView)
+
+
+        //
+        let dial = DialView(frame: NSRect(x: 10, y: 10, width: 100, height: 100))
+        view.addSubview(dial)
     }
 
     func windowDidResize(notification: NSNotification) {

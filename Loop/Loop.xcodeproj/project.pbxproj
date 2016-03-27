@@ -12,6 +12,9 @@
 		241CDF611CA8607E003892C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 241CDF601CA8607E003892C8 /* Assets.xcassets */; };
 		241CDF641CA8607E003892C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241CDF621CA8607E003892C8 /* Main.storyboard */; };
 		241CDF6C1CA8628B003892C8 /* SolidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241CDF6B1CA8628B003892C8 /* SolidView.swift */; };
+		241CDF6E1CA867C5003892C8 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241CDF6D1CA867C5003892C8 /* CircleView.swift */; };
+		241CDF701CA86CDA003892C8 /* DialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241CDF6F1CA86CDA003892C8 /* DialView.swift */; };
+		241CDF721CA86DA6003892C8 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241CDF711CA86DA6003892C8 /* NSView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		241CDF631CA8607E003892C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		241CDF651CA8607E003892C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		241CDF6B1CA8628B003892C8 /* SolidView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidView.swift; sourceTree = "<group>"; };
+		241CDF6D1CA867C5003892C8 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		241CDF6F1CA86CDA003892C8 /* DialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialView.swift; sourceTree = "<group>"; };
+		241CDF711CA86DA6003892C8 /* NSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +62,10 @@
 			children = (
 				241CDF5C1CA8607E003892C8 /* AppDelegate.swift */,
 				241CDF5E1CA8607E003892C8 /* ViewController.swift */,
+				241CDF6F1CA86CDA003892C8 /* DialView.swift */,
+				241CDF711CA86DA6003892C8 /* NSView.swift */,
 				241CDF6B1CA8628B003892C8 /* SolidView.swift */,
+				241CDF6D1CA867C5003892C8 /* CircleView.swift */,
 				241CDF601CA8607E003892C8 /* Assets.xcassets */,
 				241CDF621CA8607E003892C8 /* Main.storyboard */,
 				241CDF651CA8607E003892C8 /* Info.plist */,
@@ -134,6 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241CDF701CA86CDA003892C8 /* DialView.swift in Sources */,
+				241CDF721CA86DA6003892C8 /* NSView.swift in Sources */,
+				241CDF6E1CA867C5003892C8 /* CircleView.swift in Sources */,
 				241CDF6C1CA8628B003892C8 /* SolidView.swift in Sources */,
 				241CDF5F1CA8607E003892C8 /* ViewController.swift in Sources */,
 				241CDF5D1CA8607E003892C8 /* AppDelegate.swift in Sources */,
