@@ -1,34 +1,32 @@
 
 
 import Cocoa
+import EZAudio
 
 
-class ViewController: NSViewController, NSWindowDelegate {
-
-    var window: NSWindow!
-
-    let backgroundView = SolidView()
-
+class ViewController: NSViewController, EZMicrophoneDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.window = NSApplication.sharedApplication().windows.first!
+        EZMicrophone.sharedMicrophone().delegate = self
+        EZMicrophone.sharedMicrophone().startFetchingAudio()
 
-        self.window.delegate = self
+        print("Using input device \(EZMicrophone.sharedMicrophone().device)")
+        EZMicrophone.sharedMicrophone().output = EZOutput.sharedOutput()
 
-        backgroundView.frame = view.bounds
-        view.addSubview(backgroundView)
+        EZOutput.sharedOutput().startPlayback()
 
+        print("Using output device \(EZOutput.sharedOutput().device)")
 
-        //
-        let dial = DialView(frame: NSRect(x: 10, y: 10, width: 100, height: 100))
-        view.addSubview(dial)
     }
 
-    func windowDidResize(notification: NSNotification) {
-        backgroundView.frame = view.bounds
-        view.addSubview(backgroundView)
+    override var representedObject: AnyObject? {
+        didSet {
+        // Update the view, if already loaded.
+        }
     }
+
+
 }
 
