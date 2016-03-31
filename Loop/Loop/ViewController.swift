@@ -3,30 +3,77 @@
 import Cocoa
 import EZAudio
 
-
 class ViewController: NSViewController, EZMicrophoneDelegate {
+
+    @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
+
+    var currentInputDevice: EZAudioDevice? {
+        get {
+            return currentMicrophone!.device
+        }
+        set {
+            currentMicrophone = EZMicrophone(delegate: self)
+            currentMicrophone?.device = newValue
+
+            updatePassthrough()
+        }
+    }
+
+    var currentMicrophone = EZMicrophone.sharedMicrophone()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        EZMicrophone.sharedMicrophone().delegate = self
-        EZMicrophone.sharedMicrophone().startFetchingAudio()
+        for device in AudioHandler.inputDevices
+        where device.name.containsString("USB") {
+            currentInputDevice = device
+            break
+        }
 
-        print("Using input device \(EZMicrophone.sharedMicrophone().device)")
-        EZMicrophone.sharedMicrophone().output = EZOutput.sharedOutput()
+        currentMicrophone.delegate = self
 
-        EZOutput.sharedOutput().startPlayback()
+        updatePassthrough()
 
-        print("Using output device \(EZOutput.sharedOutput().device)")
-
+        updateIoUi()
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
+    func updateIoUi() {
+        popupInputStream.removeAllItems()
+        popupInputStream.addItemsWithTitles(AudioHandler.inputDeviceNames)
+
+        if let currentMicrophoneName = currentInputDevice!.name {
+            popupInputStream.selectItemWithTitle(currentMicrophoneName)
         }
     }
 
+    func updatePassthrough(enabled enabled: Bool = true) {
+        if enabled {
+            currentMicrophone.startFetchingAudio()
+            currentMicrophone.output = EZOutput.sharedOutput()
+            EZOutput.sharedOutput().startPlayback()
+        } else {
+            currentMicrophone.stopFetchingAudio()
+            currentMicrophone.output = nil
+            EZOutput.sharedOutput().stopPlayback()
+        }
+    }
 
+    @IBAction func monitoringCheckboxAction(sender: NSButton) {
+
+        let monitoringIsEnabled = (sender.state == NSOnState)
+
+        updatePassthrough(enabled: monitoringIsEnabled)
+    }
+
+    @IBAction func updateButtonAction(sender: AnyObject) {
+        updateIoUi()
+    }
+
+    @IBAction func popupInputStreamAction(sender: NSPopUpButton) {
+        let selectedDeviceIndex = popupInputStream.indexOfSelectedItem
+        let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices() as! [EZAudioDevice]
+        if let device = inputDevices[safe: selectedDeviceIndex] {
+            currentInputDevice = device
+        }
+    }
 }
-
