@@ -1,7 +1,4 @@
-
-
 import Cocoa
-
 
 class SolidView: NSView {
 
