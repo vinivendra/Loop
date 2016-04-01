@@ -42,6 +42,9 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupNotifications()
+
+        // Set mic to USB if available
         for device in EZAudioDevice.inputDevices()
         where device.name.containsString("USB") {
             currentInputDevice = device
@@ -55,7 +58,21 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         updateIoUi()
     }
 
+    func applicationWillTerminate(notification: NSNotification) {
+        // Delete temp folder
+        let manager = NSFileManager.defaultManager()
+        _ = try? manager.removeItemAtURL(tempDirectoryURL)
+    }
+
     // MARK: Setup and Update
+    func setupNotifications() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self,
+            selector: #selector(ViewController.applicationWillTerminate(_:)),
+            name: NSApplicationWillTerminateNotification,
+            object: nil)
+    }
+
     func updateIoUi() {
         popupInputStream.removeAllItems()
         popupInputStream.addItemsWithTitles(AudioHandler.inputDeviceNames)
