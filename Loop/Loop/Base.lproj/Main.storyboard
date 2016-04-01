@@ -734,6 +734,7 @@
                     </view>
                     <connections>
                         <outlet property="popupInputStream" destination="c2z-bY-JbX" id="GPP-Wz-cTc"/>
+                        <outlet property="recordButton" destination="KLe-XD-pNV" id="abs-ZO-SKO"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

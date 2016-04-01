@@ -6,6 +6,7 @@ var fileID = 0
 class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate {
 
     @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
+    @IBOutlet weak var recordButton: NSButton!
 
     lazy var tempDirectoryURL: NSURL = {
         let manager = NSFileManager.defaultManager()
@@ -76,7 +77,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         }
     }
 
-    func setupRecorder() {
+    func setupNewRecorder() {
         fileID += 1
 
         let tempURL = tempDirectoryURL.URLByAppendingPathComponent("testfile\(fileID).m4a")
@@ -105,9 +106,11 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         isRecording = (sender.state == NSOnState)
 
         if isRecording {
-            setupRecorder()
+            setupNewRecorder()
+            recordButton.title = "Recording..."
         } else {
             recorder?.closeAudioFile()
+            recordButton.title = "Record"
         }
     }
 
