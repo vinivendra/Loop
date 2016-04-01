@@ -3,7 +3,9 @@ import EZAudio
 
 var fileID = 0
 
-class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate {
+class ViewController: NSViewController,
+EZMicrophoneDelegate,
+EZRecorderDelegate {
 
     @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
     @IBOutlet weak var recordButton: NSButton!
@@ -24,19 +26,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
 
     var isRecording = false
 
-    var currentInputDevice: EZAudioDevice? {
-        get {
-            return currentMicrophone!.device
-        }
-        set {
-            currentMicrophone = EZMicrophone(delegate: self)
-            currentMicrophone?.device = newValue
-
-            updatePassthrough()
-        }
-    }
-
-    var currentMicrophone = EZMicrophone.sharedMicrophone()
+    var ioHandler: IOHandler?
 
     // MARK: Overrides
     override func viewDidLoad() {
@@ -44,16 +34,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
 
         setupNotifications()
 
-        // Set mic to USB if available
-        for device in EZAudioDevice.inputDevices()
-        where device.name.containsString("USB") {
-            currentInputDevice = device
-            break
-        }
-
-        currentMicrophone.delegate = self
-
-        updatePassthrough()
+        ioHandler = IOHandler(delegate: self)
 
         updateIoUi()
     }
@@ -77,34 +58,23 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         popupInputStream.removeAllItems()
         popupInputStream.addItemsWithTitles(AudioHandler.inputDeviceNames)
 
-        if let currentMicrophoneName = currentInputDevice!.name {
+        if let currentMicrophoneName = ioHandler?.currentInputDevice?.name {
             popupInputStream.selectItemWithTitle(currentMicrophoneName)
         }
     }
 
-    func updatePassthrough(enabled enabled: Bool = true) {
-        if enabled {
-            currentMicrophone.startFetchingAudio()
-            currentMicrophone.output = EZOutput.sharedOutput()
-            EZOutput.sharedOutput().startPlayback()
-        } else {
-            currentMicrophone.stopFetchingAudio()
-            currentMicrophone.output = nil
-            EZOutput.sharedOutput().stopPlayback()
-        }
-    }
-
     func setupNewRecorder() {
-        fileID += 1
+        if let microphone = ioHandler?.currentMicrophone {
+            fileID += 1
 
-        let tempURL = tempDirectoryURL.URLByAppendingPathComponent("testfile\(fileID).m4a")
+            let filePath = "testfile\(fileID).m4a"
+            let tempURL = tempDirectoryURL.URLByAppendingPathComponent(filePath)
 
-        print(tempURL)
-
-        recorder = EZRecorder(URL: tempURL,
-            clientFormat: currentMicrophone.audioStreamBasicDescription(),
-            fileType: .M4A,
-            delegate: self)
+            recorder = EZRecorder(URL: tempURL,
+                clientFormat: microphone.audioStreamBasicDescription(),
+                fileType: .M4A,
+                delegate: self)
+        }
     }
 
     // MARK: EZMicrophoneDelegate
@@ -114,7 +84,8 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         withBufferSize bufferSize: UInt32,
         withNumberOfChannels numberOfChannels: UInt32) {
             if isRecording {
-                recorder?.appendDataFromBufferList(bufferList, withBufferSize: bufferSize)
+                recorder?.appendDataFromBufferList(bufferList,
+                    withBufferSize: bufferSize)
             }
     }
 
@@ -135,7 +106,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
 
         let monitoringIsEnabled = (sender.state == NSOnState)
 
-        updatePassthrough(enabled: monitoringIsEnabled)
+        ioHandler?.updatePassthrough(enabled: monitoringIsEnabled)
     }
 
     @IBAction func updateButtonAction(sender: AnyObject) {
@@ -146,7 +117,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         let selectedDeviceIndex = popupInputStream.indexOfSelectedItem
         let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices()
         if let device = inputDevices[safe: selectedDeviceIndex] {
-            currentInputDevice = device
+            ioHandler?.currentInputDevice = device
         }
     }
 }

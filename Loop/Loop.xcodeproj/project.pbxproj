@@ -17,6 +17,7 @@
 		24383AB31CA8F7FB000E3BA5 /* SolidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24383AAF1CA8F7FB000E3BA5 /* SolidView.swift */; };
 		24CD3CD91CACBC2400E8A360 /* AudioHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */; };
 		24CD3CDB1CACBF8500E8A360 /* Array+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */; };
+		24D57EC01CAE2490003B5AAB /* IOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D57EBF1CAE2490003B5AAB /* IOHandler.swift */; };
 		8692DE48657674EA782443F7 /* Pods_Loop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DA24D1FF642AA824886F45 /* Pods_Loop.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		24383AAF1CA8F7FB000E3BA5 /* SolidView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidView.swift; sourceTree = "<group>"; };
 		24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioHandler.swift; sourceTree = "<group>"; };
 		24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Sugar.swift"; sourceTree = "<group>"; };
+		24D57EBF1CAE2490003B5AAB /* IOHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOHandler.swift; sourceTree = "<group>"; };
 		CBFDDC997D065883CC2AD0CF /* Pods-Loop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.release.xcconfig"; sourceTree = "<group>"; };
 		D5DA24D1FF642AA824886F45 /* Pods_Loop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Loop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F8F43D86B60E8508955BA5 /* Pods-Loop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				24383A951CA8F7B9000E3BA5 /* AppDelegate.swift */,
 				24383A971CA8F7B9000E3BA5 /* ViewController.swift */,
+				24D57EBF1CAE2490003B5AAB /* IOHandler.swift */,
 				24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */,
 				24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */,
 				24383AAC1CA8F7FB000E3BA5 /* CircleView.swift */,
@@ -245,6 +248,7 @@
 				24CD3CD91CACBC2400E8A360 /* AudioHandler.swift in Sources */,
 				24383A981CA8F7B9000E3BA5 /* ViewController.swift in Sources */,
 				24383AB11CA8F7FB000E3BA5 /* DialView.swift in Sources */,
+				24D57EC01CAE2490003B5AAB /* IOHandler.swift in Sources */,
 				24383AB21CA8F7FB000E3BA5 /* NSView.swift in Sources */,
 				24383A961CA8F7B9000E3BA5 /* AppDelegate.swift in Sources */,
 			);
