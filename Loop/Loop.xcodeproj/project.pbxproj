@@ -17,6 +17,10 @@
 		24383AB31CA8F7FB000E3BA5 /* SolidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24383AAF1CA8F7FB000E3BA5 /* SolidView.swift */; };
 		24CD3CD91CACBC2400E8A360 /* AudioHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */; };
 		24CD3CDB1CACBF8500E8A360 /* Array+Sugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */; };
+		24D57EC01CAE2490003B5AAB /* IOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D57EBF1CAE2490003B5AAB /* IOHandler.swift */; };
+		24E7DC131CAE271000FAD1E1 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E7DC121CAE271000FAD1E1 /* FileHandler.swift */; };
+		24E7DC151CAE28A600FAD1E1 /* RecorderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E7DC141CAE28A600FAD1E1 /* RecorderHandler.swift */; };
+		24E7DC171CAE2F1B00FAD1E1 /* LoopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E7DC161CAE2F1B00FAD1E1 /* LoopModel.swift */; };
 		8692DE48657674EA782443F7 /* Pods_Loop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DA24D1FF642AA824886F45 /* Pods_Loop.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +37,10 @@
 		24383AAF1CA8F7FB000E3BA5 /* SolidView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidView.swift; sourceTree = "<group>"; };
 		24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioHandler.swift; sourceTree = "<group>"; };
 		24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Sugar.swift"; sourceTree = "<group>"; };
+		24D57EBF1CAE2490003B5AAB /* IOHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOHandler.swift; sourceTree = "<group>"; };
+		24E7DC121CAE271000FAD1E1 /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		24E7DC141CAE28A600FAD1E1 /* RecorderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecorderHandler.swift; sourceTree = "<group>"; };
+		24E7DC161CAE2F1B00FAD1E1 /* LoopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopModel.swift; sourceTree = "<group>"; };
 		CBFDDC997D065883CC2AD0CF /* Pods-Loop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.release.xcconfig"; sourceTree = "<group>"; };
 		D5DA24D1FF642AA824886F45 /* Pods_Loop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Loop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F8F43D86B60E8508955BA5 /* Pods-Loop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loop/Pods-Loop.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +81,10 @@
 			children = (
 				24383A951CA8F7B9000E3BA5 /* AppDelegate.swift */,
 				24383A971CA8F7B9000E3BA5 /* ViewController.swift */,
+				24E7DC141CAE28A600FAD1E1 /* RecorderHandler.swift */,
+				24E7DC161CAE2F1B00FAD1E1 /* LoopModel.swift */,
+				24E7DC121CAE271000FAD1E1 /* FileHandler.swift */,
+				24D57EBF1CAE2490003B5AAB /* IOHandler.swift */,
 				24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */,
 				24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */,
 				24383AAC1CA8F7FB000E3BA5 /* CircleView.swift */,
@@ -116,6 +128,7 @@
 				24383A901CA8F7B9000E3BA5 /* Resources */,
 				6CD72E0FE89FEB8868D79044 /* Embed Pods Frameworks */,
 				B2F7D8A46748ECFE2A07C41A /* Copy Pods Resources */,
+				24D57EBD1CADE13C003B5AAB /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -187,6 +200,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		24D57EBD1CADE13C003B5AAB /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		6CD72E0FE89FEB8868D79044 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,8 +256,12 @@
 				24383AB01CA8F7FB000E3BA5 /* CircleView.swift in Sources */,
 				24CD3CD91CACBC2400E8A360 /* AudioHandler.swift in Sources */,
 				24383A981CA8F7B9000E3BA5 /* ViewController.swift in Sources */,
+				24E7DC171CAE2F1B00FAD1E1 /* LoopModel.swift in Sources */,
+				24E7DC151CAE28A600FAD1E1 /* RecorderHandler.swift in Sources */,
 				24383AB11CA8F7FB000E3BA5 /* DialView.swift in Sources */,
+				24D57EC01CAE2490003B5AAB /* IOHandler.swift in Sources */,
 				24383AB21CA8F7FB000E3BA5 /* NSView.swift in Sources */,
+				24E7DC131CAE271000FAD1E1 /* FileHandler.swift in Sources */,
 				24383A961CA8F7B9000E3BA5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

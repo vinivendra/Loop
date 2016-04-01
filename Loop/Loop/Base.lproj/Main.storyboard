@@ -710,11 +710,23 @@
                                     <action selector="monitoringCheckboxAction:" target="XfG-lQ-9wD" id="voy-nO-7ex"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KLe-XD-pNV">
+                                <rect key="frame" x="14" y="222" width="83" height="32"/>
+                                <buttonCell key="cell" type="push" title="Record" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2gi-eO-gJL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="recordButtonAction:" target="XfG-lQ-9wD" id="0d1-w5-giJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7vm-gR-rpn" secondAttribute="trailing" constant="20" id="4hP-89-PTR"/>
                             <constraint firstItem="7vm-gR-rpn" firstAttribute="baseline" secondItem="bg4-VF-vO6" secondAttribute="baseline" id="5Ev-gR-3dq"/>
                             <constraint firstItem="bg4-VF-vO6" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ThN-oc-C3V"/>
+                            <constraint firstItem="KLe-XD-pNV" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="eSc-tZ-Se8"/>
+                            <constraint firstItem="KLe-XD-pNV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="gkq-iC-tgw"/>
                             <constraint firstItem="GYe-if-OR2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="hPB-9S-d6f"/>
                             <constraint firstAttribute="bottom" secondItem="GYe-if-OR2" secondAttribute="bottom" constant="20" id="hTA-Na-YDg"/>
                             <constraint firstItem="GYe-if-OR2" firstAttribute="top" secondItem="bg4-VF-vO6" secondAttribute="bottom" constant="6" id="pYs-ff-V2W"/>
@@ -722,6 +734,7 @@
                     </view>
                     <connections>
                         <outlet property="popupInputStream" destination="c2z-bY-JbX" id="GPP-Wz-cTc"/>
+                        <outlet property="recordButton" destination="KLe-XD-pNV" id="abs-ZO-SKO"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

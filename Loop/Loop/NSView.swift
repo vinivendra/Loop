@@ -1,5 +1,3 @@
-
-
 import Cocoa
 
 extension NSView {
@@ -8,7 +6,10 @@ extension NSView {
             return self.frame.size.width
         }
         set {
-            self.frame = NSRect(x: self.frame.origin.x, y: self.frame.origin.y, width: newValue, height: self.frame.size.height)
+            self.frame = NSRect(x: self.frame.origin.x,
+                y: self.frame.origin.y,
+                width: newValue,
+                height: self.frame.size.height)
         }
     }
 
@@ -17,7 +18,10 @@ extension NSView {
             return self.frame.height
         }
         set {
-            self.frame = NSRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: newValue)
+            self.frame = NSRect(x: self.frame.origin.x,
+                y: self.frame.origin.y,
+                width: self.frame.size.width,
+                height: newValue)
         }
     }
 }

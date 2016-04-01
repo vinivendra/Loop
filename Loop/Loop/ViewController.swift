@@ -1,68 +1,59 @@
-
-
 import Cocoa
 import EZAudio
 
-class ViewController: NSViewController, EZMicrophoneDelegate {
+class ViewController: NSViewController {
 
     @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
+    @IBOutlet weak var recordButton: NSButton!
 
-    var currentInputDevice: EZAudioDevice? {
-        get {
-            return currentMicrophone!.device
-        }
-        set {
-            currentMicrophone = EZMicrophone(delegate: self)
-            currentMicrophone?.device = newValue
-
-            updatePassthrough()
-        }
-    }
-
-    var currentMicrophone = EZMicrophone.sharedMicrophone()
-
+    // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for device in AudioHandler.inputDevices
-        where device.name.containsString("USB") {
-            currentInputDevice = device
-            break
-        }
-
-        currentMicrophone.delegate = self
-
-        updatePassthrough()
+        setupNotifications()
 
         updateIoUi()
     }
 
+    func applicationWillTerminate(notification: NSNotification) {
+        LoopModel.shared.tearDown()
+    }
+
+    // MARK: Setup and Update
+    func setupNotifications() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self,
+            selector: #selector(ViewController.applicationWillTerminate(_:)),
+            name: NSApplicationWillTerminateNotification,
+            object: nil)
+    }
+
     func updateIoUi() {
         popupInputStream.removeAllItems()
-        popupInputStream.addItemsWithTitles(AudioHandler.inputDeviceNames)
+        popupInputStream.addItemsWithTitles(LoopModel.shared.allMicrophoneNames)
 
-        if let currentMicrophoneName = currentInputDevice!.name {
+        if let currentMicrophoneName = LoopModel.shared.currentMicrophoneName {
             popupInputStream.selectItemWithTitle(currentMicrophoneName)
         }
     }
 
-    func updatePassthrough(enabled enabled: Bool = true) {
-        if enabled {
-            currentMicrophone.startFetchingAudio()
-            currentMicrophone.output = EZOutput.sharedOutput()
-            EZOutput.sharedOutput().startPlayback()
+    // MARK: IBActions
+    @IBAction func recordButtonAction(sender: NSButton) {
+        let isRecording = (sender.state == NSOnState)
+
+        LoopModel.shared.toggleRecording(enabled: isRecording)
+
+        if isRecording {
+            recordButton.title = "Recording..."
         } else {
-            currentMicrophone.stopFetchingAudio()
-            currentMicrophone.output = nil
-            EZOutput.sharedOutput().stopPlayback()
+            recordButton.title = "Record"
         }
     }
 
     @IBAction func monitoringCheckboxAction(sender: NSButton) {
-
         let monitoringIsEnabled = (sender.state == NSOnState)
 
-        updatePassthrough(enabled: monitoringIsEnabled)
+        LoopModel.shared.toggleMonitoring(enabled: monitoringIsEnabled)
     }
 
     @IBAction func updateButtonAction(sender: AnyObject) {
@@ -71,9 +62,6 @@ class ViewController: NSViewController, EZMicrophoneDelegate {
 
     @IBAction func popupInputStreamAction(sender: NSPopUpButton) {
         let selectedDeviceIndex = popupInputStream.indexOfSelectedItem
-        let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices() as! [EZAudioDevice]
-        if let device = inputDevices[safe: selectedDeviceIndex] {
-            currentInputDevice = device
-        }
+        LoopModel.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
     }
 }
