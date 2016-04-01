@@ -1,9 +1,7 @@
 import Cocoa
 import EZAudio
 
-class ViewController: NSViewController,
-EZMicrophoneDelegate,
-EZRecorderDelegate {
+class ViewController: NSViewController {
 
     @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
     @IBOutlet weak var recordButton: NSButton!
@@ -14,14 +12,11 @@ EZRecorderDelegate {
 
         setupNotifications()
 
-        IOHandler.shared.delegate = self
-        RecorderHandler.shared.delegate = self
-
         updateIoUi()
     }
 
     func applicationWillTerminate(notification: NSNotification) {
-        FileHandler.shared.tearDown()
+        LoopModel.shared.tearDown()
     }
 
     // MARK: Setup and Update
@@ -35,28 +30,18 @@ EZRecorderDelegate {
 
     func updateIoUi() {
         popupInputStream.removeAllItems()
-        popupInputStream.addItemsWithTitles(AudioHandler.inputDeviceNames)
+        popupInputStream.addItemsWithTitles(LoopModel.shared.allMicrophoneNames)
 
-        if let currentInputDevice = IOHandler.shared.currentInputDevice {
-            popupInputStream.selectItemWithTitle(currentInputDevice.name)
+        if let currentMicrophoneName = LoopModel.shared.currentMicrophoneName {
+            popupInputStream.selectItemWithTitle(currentMicrophoneName)
         }
-    }
-
-    // MARK: EZMicrophoneDelegate
-
-    func microphone(microphone: EZMicrophone!,
-        hasBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
-        withBufferSize bufferSize: UInt32,
-        withNumberOfChannels numberOfChannels: UInt32) {
-            RecorderHandler.shared.receiveData(fromBufferList: bufferList,
-                withBufferSize: bufferSize)
     }
 
     // MARK: IBActions
     @IBAction func recordButtonAction(sender: NSButton) {
         let isRecording = (sender.state == NSOnState)
 
-        RecorderHandler.shared.isRecording = isRecording
+        LoopModel.shared.toggleRecording(enabled: isRecording)
 
         if isRecording {
             recordButton.title = "Recording..."
@@ -66,10 +51,9 @@ EZRecorderDelegate {
     }
 
     @IBAction func monitoringCheckboxAction(sender: NSButton) {
-
         let monitoringIsEnabled = (sender.state == NSOnState)
 
-        IOHandler.shared.updatePassthrough(enabled: monitoringIsEnabled)
+        LoopModel.shared.toggleMonitoring(enabled: monitoringIsEnabled)
     }
 
     @IBAction func updateButtonAction(sender: AnyObject) {
@@ -78,6 +62,6 @@ EZRecorderDelegate {
 
     @IBAction func popupInputStreamAction(sender: NSPopUpButton) {
         let selectedDeviceIndex = popupInputStream.indexOfSelectedItem
-        IOHandler.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
+        LoopModel.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
     }
 }
