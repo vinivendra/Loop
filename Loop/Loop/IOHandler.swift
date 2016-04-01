@@ -1,7 +1,13 @@
 import EZAudio
 
 class IOHandler {
-    var delegate: EZMicrophoneDelegate
+    static let shared = IOHandler()
+
+	var delegate: EZMicrophoneDelegate? {
+		didSet {
+			currentMicrophone.delegate = delegate
+		}
+	}
 
     var currentInputDevice: EZAudioDevice? {
         get {
@@ -17,16 +23,12 @@ class IOHandler {
 
     var currentMicrophone = EZMicrophone.sharedMicrophone()
 
-    init(delegate: EZMicrophoneDelegate) {
-        self.delegate = delegate
-
+    private init() {
         for device in EZAudioDevice.inputDevices()
         where device.name.containsString("USB") {
             currentInputDevice = device
             break
         }
-
-        currentMicrophone.delegate = delegate
 
         updatePassthrough()
     }
