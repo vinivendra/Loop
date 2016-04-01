@@ -1,11 +1,25 @@
 import Cocoa
 import EZAudio
 
+var fileID = 0
+
 class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate {
 
     @IBOutlet weak var popupInputStream: NSPopUpButtonCell!
 
-    var recorder: EZRecorder!
+    lazy var tempDirectoryURL: NSURL = {
+        let manager = NSFileManager.defaultManager()
+
+        let desktopURL = NSURL(fileURLWithPath: "\(NSHomeDirectory())/Desktop")
+        let tempURL = try? manager.URLForDirectory(.ItemReplacementDirectory,
+            inDomain: .UserDomainMask,
+            appropriateForURL: desktopURL,
+            create: true)
+
+        return tempURL ?? desktopURL
+    }()
+
+    var recorder: EZRecorder?
 
     var isRecording = false
 
@@ -38,8 +52,6 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         updatePassthrough()
 
         updateIoUi()
-
-        setupRecorder()
     }
 
     // MARK: Setup and Update
@@ -65,8 +77,13 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
     }
 
     func setupRecorder() {
-        let path = "\(NSHomeDirectory())/Documents/loopTest.m4a"
-        recorder = EZRecorder(URL: NSURL(fileURLWithPath: path),
+        fileID += 1
+
+        let tempURL = tempDirectoryURL.URLByAppendingPathComponent("testfile\(fileID).m4a")
+
+        print(tempURL)
+
+        recorder = EZRecorder(URL: tempURL,
             clientFormat: currentMicrophone.audioStreamBasicDescription(),
             fileType: .M4A,
             delegate: self)
@@ -79,7 +96,7 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
         withBufferSize bufferSize: UInt32,
         withNumberOfChannels numberOfChannels: UInt32) {
             if isRecording {
-                recorder.appendDataFromBufferList(bufferList, withBufferSize: bufferSize)
+                recorder?.appendDataFromBufferList(bufferList, withBufferSize: bufferSize)
             }
     }
 
@@ -87,8 +104,10 @@ class ViewController: NSViewController, EZMicrophoneDelegate, EZRecorderDelegate
     @IBAction func recordButtonAction(sender: NSButton) {
         isRecording = (sender.state == NSOnState)
 
-        if !isRecording {
-            recorder.closeAudioFile()
+        if isRecording {
+            setupRecorder()
+        } else {
+            recorder?.closeAudioFile()
         }
     }
 
