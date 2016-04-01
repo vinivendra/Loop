@@ -42,10 +42,6 @@ EZRecorderDelegate {
         }
     }
 
-    func setupNewRecorder() {
-        RecorderHandler.shared.refreshRecorder()
-    }
-
     // MARK: EZMicrophoneDelegate
 
     func microphone(microphone: EZMicrophone!,
