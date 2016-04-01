@@ -44,4 +44,11 @@ class IOHandler {
             EZOutput.sharedOutput().stopPlayback()
         }
     }
+
+	func switchInputToDevice(atIndex index: Int) {
+		let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices()
+		if let device = inputDevices[safe: index] {
+			currentInputDevice = device
+		}
+	}
 }

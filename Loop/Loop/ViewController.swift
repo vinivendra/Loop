@@ -15,7 +15,7 @@ EZRecorderDelegate {
         setupNotifications()
 
         IOHandler.shared.delegate = self
-		RecorderHandler.shared.delegate = self
+        RecorderHandler.shared.delegate = self
 
         updateIoUi()
     }
@@ -78,9 +78,6 @@ EZRecorderDelegate {
 
     @IBAction func popupInputStreamAction(sender: NSPopUpButton) {
         let selectedDeviceIndex = popupInputStream.indexOfSelectedItem
-        let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices()
-        if let device = inputDevices[safe: selectedDeviceIndex] {
-            IOHandler.shared.currentInputDevice = device
-        }
+        IOHandler.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
     }
 }
