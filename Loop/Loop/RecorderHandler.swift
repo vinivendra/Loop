@@ -19,14 +19,24 @@ class RecorderHandler {
     //
     private init() { }
 
-    func enableRecording(enabled: Bool) {
-        if enabled {
-            startRecording()
-        } else {
-            stopRecording()
-        }
+    func stopRecording() {
+        isRecording = false
+        recorder?.closeAudioFile()
+    }
 
-        isRecording = enabled
+    func startRecording() {
+        if let microphone = IOHandler.shared.currentMicrophone {
+            currentBufferSize = 0
+
+            let description = microphone.audioStreamBasicDescription()
+
+            recorder = EZRecorder(URL: FileHandler.shared.newTempFileURL(),
+                clientFormat: description,
+                fileType: .M4A,
+                delegate: delegate)
+
+            isRecording = true
+        }
     }
 
     func updateMaxRecordingDuration() {
@@ -48,24 +58,5 @@ class RecorderHandler {
                 recorder?.appendDataFromBufferList(bufferList,
                     withBufferSize: bufferSize)
             }
-    }
-}
-
-private extension RecorderHandler {
-    private func stopRecording() {
-        recorder?.closeAudioFile()
-    }
-
-    private func startRecording() {
-        if let microphone = IOHandler.shared.currentMicrophone {
-            currentBufferSize = 0
-
-            let description = microphone.audioStreamBasicDescription()
-
-            recorder = EZRecorder(URL: FileHandler.shared.newTempFileURL(),
-                clientFormat: description,
-                fileType: .M4A,
-                delegate: delegate)
-        }
     }
 }

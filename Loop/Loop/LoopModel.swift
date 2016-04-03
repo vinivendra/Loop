@@ -46,12 +46,12 @@ class LoopModel: NSObject {
     func toggleRecording(enabled enabled: Bool) {
         if enabled {
             if isFirstRecording {
-                RecorderHandler.shared.enableRecording(true)
+                RecorderHandler.shared.startRecording()
             } else {
                 isReadyForRecording = true
             }
         } else {
-            RecorderHandler.shared.enableRecording(false)
+            RecorderHandler.shared.stopRecording()
 
             let fileURL = FileHandler.shared.currentTempFileURL()
             PlayerHandler.shared.addFile(fileURL)
@@ -84,10 +84,10 @@ extension LoopModel: EZMicrophoneDelegate {
 
 extension LoopModel: RecorderHandlerDelegate {
     func recorderShouldLoop(recorder: EZRecorder!) {
-        RecorderHandler.shared.enableRecording(false)
+        RecorderHandler.shared.stopRecording()
         let fileURL = FileHandler.shared.currentTempFileURL()
         PlayerHandler.shared.addFile(fileURL)
-        RecorderHandler.shared.enableRecording(true)
+        RecorderHandler.shared.startRecording()
     }
 }
 
@@ -95,7 +95,7 @@ extension LoopModel: EZAudioPlayerDelegate {
     func audioPlayer(audioPlayer: EZAudioPlayer!,
         reachedEndOfAudioFile audioFile: EZAudioFile!) {
             if isReadyForRecording {
-                RecorderHandler.shared.enableRecording(true)
+                RecorderHandler.shared.startRecording()
                 isReadyForRecording = false
             }
     }
