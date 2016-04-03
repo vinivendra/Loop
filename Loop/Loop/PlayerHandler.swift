@@ -46,6 +46,7 @@ class PlayerStack {
     func pushPlayer(forFile fileURL: NSURL) {
         let file = EZAudioFile(URL: fileURL)
         let player = EZAudioPlayer(audioFile: file)
+		player.delegate = delegate
         player.shouldLoop = true
 
         if state == .Playing {
