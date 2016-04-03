@@ -38,6 +38,19 @@ class ViewController: NSViewController {
     }
 
     // MARK: IBActions
+
+    @IBAction func playButtonAction(sender: NSButton) {
+        LoopModel.shared.play()
+    }
+
+    @IBAction func pauseButtonAction(sender: NSButton) {
+        LoopModel.shared.pause()
+    }
+
+    @IBAction func resetButtonAction(sender: NSButton) {
+        LoopModel.shared.reset()
+    }
+
     @IBAction func recordButtonAction(sender: NSButton) {
         let isRecording = (sender.state == NSOnState)
 
