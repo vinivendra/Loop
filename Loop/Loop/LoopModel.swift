@@ -1,11 +1,11 @@
 import EZAudio
 
-class LoopModel: NSObject,
-EZMicrophoneDelegate,
-EZRecorderDelegate,
-EZAudioPlayerDelegate {
+class LoopModel: NSObject {
 
     static let shared = LoopModel()
+
+    var isReadyForRecording = false
+    var isFirstRecording = true
 
     var currentMicrophoneName: String? {
         get {
@@ -44,11 +44,22 @@ EZAudioPlayerDelegate {
     }
 
     func toggleRecording(enabled enabled: Bool) {
-        RecorderHandler.shared.isRecording = enabled
+        if enabled {
+            if isFirstRecording {
+                RecorderHandler.shared.startRecording()
+            } else {
+                isReadyForRecording = true
+            }
+        } else {
+            RecorderHandler.shared.stopRecording()
 
-        if !enabled {
-            let fileURL = FileHandler.shared.currentTempFileURL()
-            PlayerHandler.shared.addFile(fileURL)
+            if isFirstRecording {
+                let fileURL = FileHandler.shared.currentTempFileURL()
+                PlayerHandler.shared.addFile(fileURL)
+
+                isFirstRecording = false
+                RecorderHandler.shared.updateMaxRecordingDuration()
+            }
         }
     }
 
@@ -59,13 +70,33 @@ EZAudioPlayerDelegate {
     func switchInputToDevice(atIndex selectedDeviceIndex: Int) {
         IOHandler.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
     }
+}
 
-    // MARK: EZMicrophoneDelegate
+extension LoopModel: EZMicrophoneDelegate {
     func microphone(microphone: EZMicrophone!,
         hasBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
         withBufferSize bufferSize: UInt32,
         withNumberOfChannels numberOfChannels: UInt32) {
             RecorderHandler.shared.receiveData(fromBufferList: bufferList,
                 withBufferSize: bufferSize)
+    }
+}
+
+extension LoopModel: RecorderHandlerDelegate {
+    func recorderShouldLoop(recorder: EZRecorder!) {
+        RecorderHandler.shared.stopRecording()
+        let fileURL = FileHandler.shared.currentTempFileURL()
+        PlayerHandler.shared.addFile(fileURL)
+        RecorderHandler.shared.startRecording()
+    }
+}
+
+extension LoopModel: EZAudioPlayerDelegate {
+    func audioPlayer(audioPlayer: EZAudioPlayer!,
+        reachedEndOfAudioFile audioFile: EZAudioFile!) {
+            if isReadyForRecording {
+                RecorderHandler.shared.startRecording()
+                isReadyForRecording = false
+            }
     }
 }
