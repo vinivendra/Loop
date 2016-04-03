@@ -2,7 +2,7 @@ import EZAudio
 
 class LoopModel: NSObject,
 EZMicrophoneDelegate,
-EZRecorderDelegate,
+RecorderHandlerDelegate,
 EZAudioPlayerDelegate {
 
     static let shared = LoopModel()
@@ -44,6 +44,7 @@ EZAudioPlayerDelegate {
     }
 
     func toggleRecording(enabled enabled: Bool) {
+        print("toggle: \(enabled)")
         RecorderHandler.shared.enableRecording(enabled)
 
         if !enabled {
@@ -67,5 +68,13 @@ EZAudioPlayerDelegate {
         withNumberOfChannels numberOfChannels: UInt32) {
             RecorderHandler.shared.receiveData(fromBufferList: bufferList,
                 withBufferSize: bufferSize)
+    }
+
+    // MARK: RecorderHandlerDelegate
+    func recorderShouldLoop(recorder: EZRecorder!) {
+        RecorderHandler.shared.enableRecording(false)
+        let fileURL = FileHandler.shared.currentTempFileURL()
+        PlayerHandler.shared.addFile(fileURL)
+        RecorderHandler.shared.enableRecording(true)
     }
 }
