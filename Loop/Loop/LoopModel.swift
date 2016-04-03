@@ -23,6 +23,7 @@ EZAudioPlayerDelegate {
 
         IOHandler.shared.delegate = self
         RecorderHandler.shared.delegate = self
+		PlayerHandler.shared.delegate = self
     }
 
     func tearDown() {
