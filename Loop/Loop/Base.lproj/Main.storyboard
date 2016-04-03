@@ -720,16 +720,52 @@
                                     <action selector="recordButtonAction:" target="XfG-lQ-9wD" id="0d1-w5-giJ"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cin-Jr-nnQ">
+                                <rect key="frame" x="389" y="189" width="77" height="32"/>
+                                <buttonCell key="cell" type="push" title="Pause" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RMx-xs-Rsp">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pauseButtonAction:" target="XfG-lQ-9wD" id="JST-NZ-Tsi"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g7Z-hO-bOq">
+                                <rect key="frame" x="400" y="222" width="66" height="32"/>
+                                <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pTM-YW-0Qc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playButtonAction:" target="XfG-lQ-9wD" id="wH9-kO-Slg"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JT8-BQ-aIH">
+                                <rect key="frame" x="391" y="156" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5nV-kY-gab">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetButtonAction:" target="XfG-lQ-9wD" id="kEW-AM-G9s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JT8-BQ-aIH" secondAttribute="trailing" constant="20" id="4Hb-3k-8FX"/>
                             <constraint firstAttribute="trailing" secondItem="7vm-gR-rpn" secondAttribute="trailing" constant="20" id="4hP-89-PTR"/>
                             <constraint firstItem="7vm-gR-rpn" firstAttribute="baseline" secondItem="bg4-VF-vO6" secondAttribute="baseline" id="5Ev-gR-3dq"/>
+                            <constraint firstItem="g7Z-hO-bOq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="J5g-mP-0Vj"/>
+                            <constraint firstItem="Cin-Jr-nnQ" firstAttribute="top" secondItem="g7Z-hO-bOq" secondAttribute="bottom" constant="12" id="MtN-6E-6Dg"/>
                             <constraint firstItem="bg4-VF-vO6" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ThN-oc-C3V"/>
+                            <constraint firstAttribute="trailing" secondItem="Cin-Jr-nnQ" secondAttribute="trailing" constant="20" id="UBb-pM-6qR"/>
                             <constraint firstItem="KLe-XD-pNV" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="eSc-tZ-Se8"/>
                             <constraint firstItem="KLe-XD-pNV" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="gkq-iC-tgw"/>
                             <constraint firstItem="GYe-if-OR2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="hPB-9S-d6f"/>
                             <constraint firstAttribute="bottom" secondItem="GYe-if-OR2" secondAttribute="bottom" constant="20" id="hTA-Na-YDg"/>
                             <constraint firstItem="GYe-if-OR2" firstAttribute="top" secondItem="bg4-VF-vO6" secondAttribute="bottom" constant="6" id="pYs-ff-V2W"/>
+                            <constraint firstAttribute="trailing" secondItem="g7Z-hO-bOq" secondAttribute="trailing" constant="20" id="wPP-ik-OUy"/>
+                            <constraint firstItem="JT8-BQ-aIH" firstAttribute="top" secondItem="Cin-Jr-nnQ" secondAttribute="bottom" constant="12" id="zgQ-yN-ZVx"/>
                         </constraints>
                     </view>
                     <connections>

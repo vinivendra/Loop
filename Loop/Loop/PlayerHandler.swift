@@ -1,30 +1,37 @@
-
 import EZAudio
 
-//self.player = [EZAudioPlayer audioPlayerWithDelegate:self];
-//self.player.shouldLoop = YES;
+class PlayerHandler {
+    static let shared = PlayerHandler()
 
-//-(void)play:(id)sender
-//{
-//	if (![self.player isPlaying])
-//	{
-//		if (self.player.state == EZAudioPlayerStateEndOfFile)
-//		{
-//			[self.player seekToFrame:0];
-//		}
-//		if (self.audioPlot.plotType == EZPlotTypeBuffer
-//			&& self.audioPlot.shouldFill == YES)
-//		{
-//			self.audioPlot.plotType = EZPlotTypeRolling;
-//		}
-//		[self.player play];
-//	}
-//	else
-//	{
-//		[self.player pause];
-//	}
-//}
+    var delegate: EZAudioPlayerDelegate? {
+        didSet {
+            player.delegate = delegate
+        }
+    }
 
-//[self.player seekToFrame:(SInt64)value];
+    let player: EZAudioPlayer = {
+        let instance = EZAudioPlayer()
+        instance.shouldLoop = true
+        return instance
+    }()
+
+    //
+    func setFile(fileURL: NSURL) {
+        player.audioFile = EZAudioFile(URL: fileURL)
+    }
+
+    func play() {
+        player.play()
+    }
+
+    func pause() {
+        player.pause()
+    }
+
+    func reset() {
+        player.seekToFrame(0)
+        player.play()
+    }
+}
 
 //self.player.audioFile = [EZAudioFile audioFileWithURL:filePathURL];

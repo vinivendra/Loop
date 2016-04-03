@@ -38,6 +38,19 @@ class ViewController: NSViewController {
     }
 
     // MARK: IBActions
+
+    @IBAction func playButtonAction(sender: NSButton) {
+        PlayerHandler.shared.play()
+    }
+
+    @IBAction func pauseButtonAction(sender: NSButton) {
+        PlayerHandler.shared.pause()
+    }
+
+    @IBAction func resetButtonAction(sender: NSButton) {
+        PlayerHandler.shared.reset()
+    }
+
     @IBAction func recordButtonAction(sender: NSButton) {
         let isRecording = (sender.state == NSOnState)
 

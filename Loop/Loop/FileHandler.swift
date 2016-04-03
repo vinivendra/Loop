@@ -28,6 +28,10 @@ class FileHandler {
     func newTempFileURL() -> NSURL {
         fileID += 1
 
+        return currentTempFileURL()
+    }
+
+    func currentTempFileURL() -> NSURL {
         let filePath = "testfile\(fileID).m4a"
         let tempURL = tempDirectoryURL.URLByAppendingPathComponent(filePath)
 

@@ -1,6 +1,9 @@
 import EZAudio
 
-class LoopModel: NSObject, EZMicrophoneDelegate, EZRecorderDelegate {
+class LoopModel: NSObject,
+EZMicrophoneDelegate,
+EZRecorderDelegate,
+EZAudioPlayerDelegate {
 
     static let shared = LoopModel()
 
@@ -29,6 +32,12 @@ class LoopModel: NSObject, EZMicrophoneDelegate, EZRecorderDelegate {
     // MARK: App Management
     func toggleRecording(enabled enabled: Bool) {
         RecorderHandler.shared.isRecording = enabled
+
+        if !enabled {
+            let fileURL = FileHandler.shared.currentTempFileURL()
+            PlayerHandler.shared.setFile(fileURL)
+            PlayerHandler.shared.play()
+        }
     }
 
     func toggleMonitoring(enabled enabled: Bool) {
