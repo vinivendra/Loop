@@ -44,7 +44,7 @@ EZAudioPlayerDelegate {
     }
 
     func toggleRecording(enabled enabled: Bool) {
-        RecorderHandler.shared.isRecording = enabled
+        RecorderHandler.shared.enableRecording(enabled)
 
         if !enabled {
             let fileURL = FileHandler.shared.currentTempFileURL()

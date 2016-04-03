@@ -5,18 +5,13 @@ class RecorderHandler {
 
     private var recorder: EZRecorder?
 
-    var isRecording = false {
-        didSet {
-            if isRecording {
-                refreshRecorder()
-            } else {
-                recorder?.closeAudioFile()
-            }
-        }
-    }
+    private var maxBufferSize: UInt32?
+
+    private var isRecording = false
 
     var delegate: EZRecorderDelegate?
 
+    //
     private init() { }
 
     func refreshRecorder() {
@@ -34,8 +29,20 @@ class RecorderHandler {
         fromBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
         withBufferSize bufferSize: UInt32) {
             if isRecording {
+
+
                 recorder?.appendDataFromBufferList(bufferList,
                     withBufferSize: bufferSize)
             }
+    }
+
+    func enableRecording(enabled: Bool) {
+        if enabled {
+            refreshRecorder()
+        } else {
+            recorder?.closeAudioFile()
+        }
+
+        isRecording = enabled
     }
 }
