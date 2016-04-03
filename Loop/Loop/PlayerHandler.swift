@@ -9,7 +9,7 @@ class PlayerHandler {
         }
     }
 
-    let player: EZAudioPlayer = {
+    private let player: EZAudioPlayer = {
         let instance = EZAudioPlayer()
         instance.shouldLoop = true
         return instance
@@ -33,5 +33,3 @@ class PlayerHandler {
         player.play()
     }
 }
-
-//self.player.audioFile = [EZAudioFile audioFileWithURL:filePathURL];
