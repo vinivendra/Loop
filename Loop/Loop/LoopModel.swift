@@ -1,9 +1,11 @@
 import EZAudio
 
-class LoopModel: NSObject,
-EZAudioPlayerDelegate {
+class LoopModel: NSObject {
 
     static let shared = LoopModel()
+
+    var isReadyForRecording = false
+    var isFirstRecording = true
 
     var currentMicrophoneName: String? {
         get {
@@ -42,11 +44,22 @@ EZAudioPlayerDelegate {
     }
 
     func toggleRecording(enabled enabled: Bool) {
-        RecorderHandler.shared.enableRecording(enabled)
+        if enabled {
+            if isFirstRecording {
+                RecorderHandler.shared.enableRecording(true)
+            } else {
+                isReadyForRecording = true
+            }
+        } else {
+            RecorderHandler.shared.enableRecording(false)
 
-        if !enabled {
             let fileURL = FileHandler.shared.currentTempFileURL()
             PlayerHandler.shared.addFile(fileURL)
+
+            if isFirstRecording {
+                isFirstRecording = false
+                RecorderHandler.shared.updateMaxRecordingDuration()
+            }
         }
     }
 
@@ -75,5 +88,15 @@ extension LoopModel: RecorderHandlerDelegate {
         let fileURL = FileHandler.shared.currentTempFileURL()
         PlayerHandler.shared.addFile(fileURL)
         RecorderHandler.shared.enableRecording(true)
+    }
+}
+
+extension LoopModel: EZAudioPlayerDelegate {
+    func audioPlayer(audioPlayer: EZAudioPlayer!,
+        reachedEndOfAudioFile audioFile: EZAudioFile!) {
+            if isReadyForRecording {
+                RecorderHandler.shared.enableRecording(true)
+                isReadyForRecording = false
+            }
     }
 }

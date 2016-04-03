@@ -29,6 +29,10 @@ class RecorderHandler {
         isRecording = enabled
     }
 
+    func updateMaxRecordingDuration() {
+        maxBufferSize = currentBufferSize
+    }
+
     func receiveData(
         fromBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
         withBufferSize bufferSize: UInt32) {
@@ -50,8 +54,6 @@ class RecorderHandler {
 private extension RecorderHandler {
     private func stopRecording() {
         recorder?.closeAudioFile()
-
-        maxBufferSize = maxBufferSize ?? currentBufferSize
     }
 
     private func startRecording() {

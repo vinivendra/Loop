@@ -3,11 +3,11 @@ import EZAudio
 class IOHandler {
     static let shared = IOHandler()
 
-	var delegate: EZMicrophoneDelegate? {
-		didSet {
-			currentMicrophone.delegate = delegate
-		}
-	}
+    var delegate: EZMicrophoneDelegate? {
+        didSet {
+            currentMicrophone.delegate = delegate
+        }
+    }
 
     var currentInputDevice: EZAudioDevice? {
         get {
@@ -45,10 +45,10 @@ class IOHandler {
         }
     }
 
-	func switchInputToDevice(atIndex index: Int) {
-		let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices()
-		if let device = inputDevices[safe: index] {
-			currentInputDevice = device
-		}
-	}
+    func switchInputToDevice(atIndex index: Int) {
+        let inputDevices: [EZAudioDevice] = EZAudioDevice.inputDevices()
+        if let device = inputDevices[safe: index] {
+            currentInputDevice = device
+        }
+    }
 }
