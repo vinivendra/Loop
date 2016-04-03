@@ -53,10 +53,10 @@ class LoopModel: NSObject {
         } else {
             RecorderHandler.shared.stopRecording()
 
-            let fileURL = FileHandler.shared.currentTempFileURL()
-            PlayerHandler.shared.addFile(fileURL)
-
             if isFirstRecording {
+                let fileURL = FileHandler.shared.currentTempFileURL()
+                PlayerHandler.shared.addFile(fileURL)
+
                 isFirstRecording = false
                 RecorderHandler.shared.updateMaxRecordingDuration()
             }
