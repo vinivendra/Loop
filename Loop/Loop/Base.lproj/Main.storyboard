@@ -673,23 +673,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GYe-if-OR2">
-                                <rect key="frame" x="18" y="17" width="76" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Nju-tm-DQb" id="c2z-bY-JbX">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="Jcf-2m-WJr">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="Nju-tm-DQb"/>
-                                            <menuItem title="Item 2" id="Hrg-CJ-GnH"/>
-                                            <menuItem title="Item 3" id="Noc-wl-lAP"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="popupInputStreamAction:" target="XfG-lQ-9wD" id="Uf1-Gn-GuW"/>
-                                </connections>
-                            </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bg4-VF-vO6">
                                 <rect key="frame" x="14" y="40" width="85" height="32"/>
                                 <buttonCell key="cell" type="push" title="Update" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ecq-cm-upn">
@@ -750,6 +733,23 @@
                                     <action selector="resetButtonAction:" target="XfG-lQ-9wD" id="kEW-AM-G9s"/>
                                 </connections>
                             </button>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GYe-if-OR2">
+                                <rect key="frame" x="18" y="17" width="76" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Nju-tm-DQb" id="c2z-bY-JbX">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Jcf-2m-WJr">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="Nju-tm-DQb"/>
+                                            <menuItem title="Item 2" id="Hrg-CJ-GnH"/>
+                                            <menuItem title="Item 3" id="Noc-wl-lAP"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="popupInputStreamAction:" target="XfG-lQ-9wD" id="Uf1-Gn-GuW"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JT8-BQ-aIH" secondAttribute="trailing" constant="20" id="4Hb-3k-8FX"/>

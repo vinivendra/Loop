@@ -23,7 +23,7 @@ EZAudioPlayerDelegate {
 
         IOHandler.shared.delegate = self
         RecorderHandler.shared.delegate = self
-		PlayerHandler.shared.delegate = self
+        PlayerHandler.shared.delegate = self
     }
 
     func tearDown() {
@@ -48,8 +48,7 @@ EZAudioPlayerDelegate {
 
         if !enabled {
             let fileURL = FileHandler.shared.currentTempFileURL()
-            PlayerHandler.shared.setFile(fileURL)
-            PlayerHandler.shared.play()
+            PlayerHandler.shared.addFile(fileURL)
         }
     }
 

@@ -5,31 +5,82 @@ class PlayerHandler {
 
     var delegate: EZAudioPlayerDelegate? {
         didSet {
-            player.delegate = delegate
+            playerStack.delegate = delegate
         }
     }
 
-    private let player: EZAudioPlayer = {
-        let instance = EZAudioPlayer()
-        instance.shouldLoop = true
-        return instance
-    }()
+    private let playerStack = PlayerStack()
 
     //
-    func setFile(fileURL: NSURL) {
-        player.audioFile = EZAudioFile(URL: fileURL)
+    func addFile(fileURL: NSURL) {
+        playerStack.pushPlayer(forFile: fileURL)
     }
 
     func play() {
-        player.play()
+        playerStack.play()
     }
 
     func pause() {
-        player.pause()
+        playerStack.pause()
     }
 
     func reset() {
-        player.seekToFrame(0)
-        player.play()
+        playerStack.reset()
+    }
+}
+
+class PlayerStack {
+    var stack = [EZAudioPlayer]()
+
+    var state = EZAudioPlayerState.Playing
+
+    var delegate: EZAudioPlayerDelegate? {
+        didSet {
+            stack.forEach { player in
+                player.delegate = delegate
+            }
+        }
+    }
+
+    func pushPlayer(forFile fileURL: NSURL) {
+        let file = EZAudioFile(URL: fileURL)
+        let player = EZAudioPlayer(audioFile: file)
+        player.shouldLoop = true
+
+        if state == .Playing {
+            player.play()
+        }
+
+        stack.append(player)
+    }
+
+    func pop() {
+        let player = stack.popLast()
+        player?.pause()
+    }
+
+    func play() {
+        state = .Playing
+
+        stack.forEach { player in
+            player.play()
+        }
+    }
+
+    func pause() {
+        state = .Paused
+
+        stack.forEach { player in
+            player.pause()
+        }
+    }
+
+    func reset() {
+        state = .Playing
+
+        stack.forEach { player in
+            player.seekToFrame(0)
+            player.play()
+        }
     }
 }
