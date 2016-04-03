@@ -1,8 +1,6 @@
 import EZAudio
 
 class LoopModel: NSObject,
-EZMicrophoneDelegate,
-RecorderHandlerDelegate,
 EZAudioPlayerDelegate {
 
     static let shared = LoopModel()
@@ -59,8 +57,9 @@ EZAudioPlayerDelegate {
     func switchInputToDevice(atIndex selectedDeviceIndex: Int) {
         IOHandler.shared.switchInputToDevice(atIndex: selectedDeviceIndex)
     }
+}
 
-    // MARK: EZMicrophoneDelegate
+extension LoopModel: EZMicrophoneDelegate {
     func microphone(microphone: EZMicrophone!,
         hasBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
         withBufferSize bufferSize: UInt32,
@@ -68,8 +67,9 @@ EZAudioPlayerDelegate {
             RecorderHandler.shared.receiveData(fromBufferList: bufferList,
                 withBufferSize: bufferSize)
     }
+}
 
-    // MARK: RecorderHandlerDelegate
+extension LoopModel: RecorderHandlerDelegate {
     func recorderShouldLoop(recorder: EZRecorder!) {
         RecorderHandler.shared.enableRecording(false)
         let fileURL = FileHandler.shared.currentTempFileURL()
