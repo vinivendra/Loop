@@ -30,9 +30,9 @@ class PlayerHandler {
 }
 
 class PlayerStack {
-    var stack = [EZAudioPlayer]()
+    private var stack = [EZAudioPlayer]()
 
-    var state = EZAudioPlayerState.Playing
+    private var state = EZAudioPlayerState.Playing
 
     var delegate: EZAudioPlayerDelegate? {
         didSet {
@@ -42,6 +42,7 @@ class PlayerStack {
         }
     }
 
+    //
     func pushPlayer(forFile fileURL: NSURL) {
         let file = EZAudioFile(URL: fileURL)
         let player = EZAudioPlayer(audioFile: file)
