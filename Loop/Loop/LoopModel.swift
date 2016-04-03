@@ -44,7 +44,6 @@ EZAudioPlayerDelegate {
     }
 
     func toggleRecording(enabled enabled: Bool) {
-        print("toggle: \(enabled)")
         RecorderHandler.shared.enableRecording(enabled)
 
         if !enabled {
