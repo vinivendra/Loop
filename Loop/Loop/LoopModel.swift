@@ -30,6 +30,18 @@ EZAudioPlayerDelegate {
     }
 
     // MARK: App Management
+    func play() {
+        PlayerHandler.shared.play()
+    }
+
+    func pause() {
+        PlayerHandler.shared.pause()
+    }
+
+    func reset() {
+        PlayerHandler.shared.reset()
+    }
+
     func toggleRecording(enabled enabled: Bool) {
         RecorderHandler.shared.isRecording = enabled
 
