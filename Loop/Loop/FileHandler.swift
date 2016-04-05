@@ -17,7 +17,8 @@ class FileHandler {
         return tempURL ?? desktopURL
     }()
 
-    private init() { }
+    private init() {
+    }
 
     func tearDown() {
         // Delete temp folder

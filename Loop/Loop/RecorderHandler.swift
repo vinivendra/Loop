@@ -17,7 +17,8 @@ class RecorderHandler {
     var delegate: RecorderHandlerDelegate?
 
     //
-    private init() { }
+    private init() {
+    }
 
     func stopRecording() {
         isRecording = false
