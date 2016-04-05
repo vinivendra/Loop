@@ -1,0 +1,22 @@
+machine:
+  xcode:
+    version: "7.2"
+
+dependencies:
+  pre:
+    - brew update
+    - brew install swiftlint
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
+test:
+  override:
+    # workaround
+    # https://github.com/realm/SwiftLint/issues/13
+    # http://qiita.com/noboru_i/items/431aa190d131795aeddc
+    - ln -s /Applications/Xcode-7.2.app /Applications/Xcode.app
+
+    - fastlane test_all

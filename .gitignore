@@ -1,3 +1,6 @@
 .DS_Store
+
 Loop/Loop.xcworkspace/xcuserdata/
 Loop/Pods/Pods.xcodeproj/xcuserdata/
+
+Loop/Carthage/Build/
