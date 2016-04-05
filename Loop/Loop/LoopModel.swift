@@ -45,12 +45,16 @@ class LoopModel: NSObject {
 
     func toggleRecording(enabled enabled: Bool) {
         if enabled {
+			recorderMachine.tryEvent(.StartRecording)
+
             if isFirstRecording {
                 RecorderHandler.shared.startRecording()
             } else {
                 isReadyForRecording = true
             }
         } else {
+			recorderMachine.tryEvent(.StopRecording)
+
             RecorderHandler.shared.stopRecording()
 
             if isFirstRecording {
@@ -95,6 +99,7 @@ extension LoopModel: EZAudioPlayerDelegate {
     func audioPlayer(audioPlayer: EZAudioPlayer!,
         reachedEndOfAudioFile audioFile: EZAudioFile!) {
             if isReadyForRecording {
+				recorderMachine.tryEvent(.LoopRecording)
                 RecorderHandler.shared.startRecording()
                 isReadyForRecording = false
             }

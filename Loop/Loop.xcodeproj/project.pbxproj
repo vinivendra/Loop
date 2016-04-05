@@ -10,6 +10,7 @@
 		243605661CB44866007FD568 /* SwiftState.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243605651CB44866007FD568 /* SwiftState.framework */; };
 		243605671CB44866007FD568 /* SwiftState.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 243605651CB44866007FD568 /* SwiftState.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2436056C1CB448CB007FD568 /* SwiftState.framework.dSYM in Copy Files (Carthage dSYM's) */ = {isa = PBXBuildFile; fileRef = 2436056B1CB448CB007FD568 /* SwiftState.framework.dSYM */; };
+		2436056E1CB45E17007FD568 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2436056D1CB45E17007FD568 /* StateMachine.swift */; };
 		24383A961CA8F7B9000E3BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24383A951CA8F7B9000E3BA5 /* AppDelegate.swift */; };
 		24383A981CA8F7B9000E3BA5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24383A971CA8F7B9000E3BA5 /* ViewController.swift */; };
 		24383A9A1CA8F7B9000E3BA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24383A991CA8F7B9000E3BA5 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		243605651CB44866007FD568 /* SwiftState.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftState.framework; path = Carthage/Build/Mac/SwiftState.framework; sourceTree = "<group>"; };
 		2436056B1CB448CB007FD568 /* SwiftState.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftState.framework.dSYM; path = Carthage/Build/Mac/SwiftState.framework.dSYM; sourceTree = "<group>"; };
+		2436056D1CB45E17007FD568 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		24383A921CA8F7B9000E3BA5 /* Loop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24383A951CA8F7B9000E3BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24383A971CA8F7B9000E3BA5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,10 +116,11 @@
 			children = (
 				24383A951CA8F7B9000E3BA5 /* AppDelegate.swift */,
 				24383A971CA8F7B9000E3BA5 /* ViewController.swift */,
-				24E7DC141CAE28A600FAD1E1 /* RecorderHandler.swift */,
 				24E7DC161CAE2F1B00FAD1E1 /* LoopModel.swift */,
-				24E7DC121CAE271000FAD1E1 /* FileHandler.swift */,
+				2436056D1CB45E17007FD568 /* StateMachine.swift */,
 				24B64CBA1CB0309A00F84E12 /* PlayerHandler.swift */,
+				24E7DC141CAE28A600FAD1E1 /* RecorderHandler.swift */,
+				24E7DC121CAE271000FAD1E1 /* FileHandler.swift */,
 				24D57EBF1CAE2490003B5AAB /* IOHandler.swift */,
 				24CD3CDA1CACBF8500E8A360 /* Array+Sugar.swift */,
 				24CD3CD81CACBC2400E8A360 /* AudioHandler.swift */,
@@ -309,6 +312,7 @@
 				24383AB31CA8F7FB000E3BA5 /* SolidView.swift in Sources */,
 				24383AB01CA8F7FB000E3BA5 /* CircleView.swift in Sources */,
 				24CD3CD91CACBC2400E8A360 /* AudioHandler.swift in Sources */,
+				2436056E1CB45E17007FD568 /* StateMachine.swift in Sources */,
 				24383A981CA8F7B9000E3BA5 /* ViewController.swift in Sources */,
 				24E7DC171CAE2F1B00FAD1E1 /* LoopModel.swift in Sources */,
 				24E7DC151CAE28A600FAD1E1 /* RecorderHandler.swift in Sources */,

@@ -50,6 +50,7 @@ class RecorderHandler {
             if isRecording {
                 if let maxBufferSize = maxBufferSize {
                     if currentBufferSize + bufferSize > maxBufferSize {
+						recorderMachine.tryEvent(.LoopRecording)
                         delegate?.recorderShouldLoop(recorder)
                     }
                 }
