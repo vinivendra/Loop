@@ -36,9 +36,7 @@ class PlayerStack {
 
     var delegate: EZAudioPlayerDelegate? {
         didSet {
-            stack.forEach { player in
-                player.delegate = delegate
-            }
+			updateDelegate()
         }
     }
 
@@ -46,7 +44,6 @@ class PlayerStack {
     func pushPlayer(forFile fileURL: NSURL) {
         let file = EZAudioFile(URL: fileURL)
         let player = EZAudioPlayer(audioFile: file)
-		player.delegate = delegate
         player.shouldLoop = true
 
         if state == .Playing {
@@ -54,6 +51,8 @@ class PlayerStack {
         }
 
         stack.append(player)
+
+		updateDelegate()
     }
 
     func pop() {
@@ -85,4 +84,8 @@ class PlayerStack {
             player.play()
         }
     }
+
+	private func updateDelegate() {
+		stack.first?.delegate = self.delegate
+	}
 }

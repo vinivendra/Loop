@@ -77,17 +77,21 @@ class LoopModel: NSObject {
 }
 
 extension LoopModel: EZMicrophoneDelegate {
+
     func microphone(microphone: EZMicrophone!,
         hasBufferList bufferList: UnsafeMutablePointer<AudioBufferList>,
         withBufferSize bufferSize: UInt32,
         withNumberOfChannels numberOfChannels: UInt32) {
+
             RecorderHandler.shared.receiveData(fromBufferList: bufferList,
                 withBufferSize: bufferSize)
     }
 }
 
 extension LoopModel: RecorderHandlerDelegate {
+
     func recorderShouldLoop(recorder: EZRecorder!) {
+
         RecorderHandler.shared.stopRecording()
         let fileURL = FileHandler.shared.currentTempFileURL()
         PlayerHandler.shared.addFile(fileURL)
@@ -96,10 +100,12 @@ extension LoopModel: RecorderHandlerDelegate {
 }
 
 extension LoopModel: EZAudioPlayerDelegate {
-    func audioPlayer(audioPlayer: EZAudioPlayer!,
+
+    func audioPlayer(player: EZAudioPlayer!,
         reachedEndOfAudioFile audioFile: EZAudioFile!) {
+
+			recorderMachine.tryEvent(.LoopPlayback)
             if isReadyForRecording {
-				recorderMachine.tryEvent(.LoopRecording)
                 RecorderHandler.shared.startRecording()
                 isReadyForRecording = false
             }
